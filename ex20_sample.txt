@@ -1,0 +1,5 @@
+This is stuff I typed into a file.
+It is really cool stuff.
+Lots and lots of fun to have in here.
+您好，这里是文本文件。
+文件已经准备好，你可以读取。
