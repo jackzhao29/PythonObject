@@ -32,3 +32,10 @@ print "Here is apuzzle."
 what = add(age,subtract(height,multiply(weight,divide(iq, 2))))
 
 print "That becomes:", what, "Can you do it by hand?"
+
+print "===>>>"
+test = int(raw_input())
+print "===>>>"
+test01= float(raw_input())
+
+print test + test01
