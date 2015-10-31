@@ -30,5 +30,11 @@ elif door == "2":
 	else:
 		print "The insanity rots your eyes into a pool of muck. Good jbo!"
 
-else:
+elif int(door) in range(3,10):
 	print "You stumble around and fail on a knife and die. Good job!"
+
+elif  11 < int(door) < 20:
+	print "11<x<20"
+
+else:
+	print "Not!"
