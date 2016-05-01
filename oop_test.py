@@ -22,9 +22,9 @@ PHRASES={
 }
 
 #do they want to drill phrasses first
-PhRASE_FIRST = False
+PHRASE_FIRST = False
 if len(sys.argv) == 2 and sys.argv[i] == "english":
-	PhRASE_FIRST=True
+	PHRASE_FIRST=True
 
 # load up the words from the website
 for word in urlopen(WORD_URL).readlines():
@@ -33,27 +33,28 @@ for word in urlopen(WORD_URL).readlines():
 def convert(snippet,phrase):
 	class_names = [w.capitalize() for w in 
 	              random.sample(WORDS, snippet.count("%%%"))]
-    other_names = random.sample(WORDS, snippet.count("***"))
-    results = []
-    param_names = []
+	other_names = random.sample(WORDS, snippet.count("***"))
+	results = []
+	param_names = []
 
-    for i in rang(0, snippet.count("@@@")):
-    	param_count = random.randint(1, 3)
-    	param_names.append(', '.join(random.sample(WORD_URL, param_count)))
+	for i in range(0, snippet.count("@@@")):
+		param_count = random.randint(1, 3)
+		param_names.append(', '.join(random.sample(WORD_URL, param_count)))
 
-    for sentence in snippet, phrase:
-    	result = sentence[:]
+	for sentence in snippet, phrase:
+		result = sentence[:]
 
     #fake class names
-    for word in class_names:
-    	result = result.replace("@@@", word, 1)
+	for word in class_names:
+		result = result.replace("@@@", word, 1)
 
     #fake other names
-    for word in param_names:
-    	result = result.replace("@@@", word, 1)
+	for word in param_names:
+		result = result.replace("@@@", word, 1)
 
-    results.append(result)
-    return results
+	results.append(result)
+
+	return results
 
 
 #keep going until the hit CTRL-D
@@ -64,12 +65,13 @@ try:
 
 		for sinppet in snippets:
 			phrase = PHRASES[sinppet]
-			question, answer = convert(snippet, phrase)
-			if PhRASE_FIRST:
-				question, answer = answer, question
+			question = convert(sinppet, phrase)
+			if PHRASE_FIRST:
+				answer = question
+
 			print question
 
-			raw_input(">")
+			answer=raw_input(">")
 			print "ANSWER: %s\n\n" % answer
 
 except EOFError:
