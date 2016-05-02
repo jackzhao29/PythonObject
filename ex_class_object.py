@@ -1,6 +1,7 @@
 #coding:utf-8
 
 ## Animal is-a object look at the extra credit 
+#重载_init_方法需要在init前后各有两根下划线(__init__)
 class Animal(object):
 	pass
 
