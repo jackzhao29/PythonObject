@@ -12,15 +12,30 @@ class Scene(object):
 class Engine(object):
 
 	def __init__(self,scene_map):
-		pass
+		self.scene_map = scene_map
+		
 
 	def play(self):
-		pass
+		current_scene = self.scene_map.opening_scene()
+
+		while True:
+		 	print "\n-------------"
+		 	next_scene_name = current_scene.enter()
+		 	current_scene = self.scene_map.next_scene(next_scene_name)
+
 
 class Death(Scene):
 
+	quips = [
+		"You dide. You kinda suck at this.",
+		"Your mom would be proud...if she were smarter.",
+		"Such a luser.",
+		"I have a small puppy that's better at this."
+	]
+
 	def enter(self):
-		pass
+		print Death.quips[randint(0, len(self.quips)-1)]
+		
 
 class Centralcorridor(Scene):
 
