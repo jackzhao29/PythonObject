@@ -1,5 +1,7 @@
 #coding:utf-8
 #来自Percal 25号行星的哥顿人
+from sys import exit
+from random import randint
 
 #场景类
 class Scene(object):
@@ -13,7 +15,7 @@ class Engine(object):
 
 	def __init__(self,scene_map):
 		self.scene_map = scene_map
-		
+
 
 	def play(self):
 		current_scene = self.scene_map.opening_scene()
@@ -21,7 +23,11 @@ class Engine(object):
 		while True:
 		 	print "\n-------------"
 		 	next_scene_name = current_scene.enter()
-		 	current_scene = self.scene_map.next_scene(next_scene_name)
+			if next_scene_name is not None:
+				current_scene = self.scene_map.next_scene(next_scene_name)
+			else:
+				print "No more scenes"
+
 
 
 class Death(Scene):
@@ -35,7 +41,7 @@ class Death(Scene):
 
 	def enter(self):
 		print Death.quips[randint(0, len(self.quips)-1)]
-		
+
 
 class Centralcorridor(Scene):
 
@@ -81,7 +87,7 @@ class Centralcorridor(Scene):
 		else:
 			print "DOES NOT COMPUTE!"
 			return 'central_corridor'
-		
+
 
 class LaserWeaponArmory(Scene):
 
@@ -119,7 +125,7 @@ class TheBridge(Scene):
 			print "DOES NOT COMPUTE!"
 			return "the_bridge"
 
-		
+
 
 class EscapePod(Scene):
 
@@ -128,13 +134,27 @@ class EscapePod(Scene):
 
 class Map(object):
 
+	scenes = {
+		'central_corridor': Centralcorridor(),
+		'laser_weapon_armory': LaserWeaponArmory(),
+		'the_bridge': TheBridge(),
+		'escape_pod': EscapePod(),
+		'death': Death()
+	}
+
+
+
+
 	def __init__(self, start_scene):
-		pass
+		self.start_scene = start_scene
+
 
 	def next_scene(self, scene_name):
-		pass
+		return Map.scenes.get(scene_name)
+
 
 	def opening_scene(self):
+		return self.next_scene(self.start_scene)
 		pass
 
 
